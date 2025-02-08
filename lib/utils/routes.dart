@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:realtime_todo/screens/AddEmployee/add_screen.dart';
+import 'package:realtime_todo/screens/Add&EditEmployee/add_screen.dart';
 import 'package:realtime_todo/screens/Home/home_screen.dart';
 
 class AppRouter {

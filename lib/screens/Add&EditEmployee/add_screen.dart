@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import 'package:realtime_todo/constant/colors.dart';
-import 'package:realtime_todo/screens/AddEmployee/bloc/add_bloc.dart';
+import 'package:realtime_todo/screens/Add&EditEmployee/bloc/add_bloc.dart';
 import 'package:realtime_todo/widgets/custom_appbar.dart';
 import 'package:realtime_todo/widgets/custom_button.dart';
 import 'package:realtime_todo/widgets/custom_textfield.dart';

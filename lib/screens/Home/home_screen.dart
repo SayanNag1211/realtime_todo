@@ -5,7 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:realtime_todo/constant/colors.dart';
-import 'package:realtime_todo/screens/AddEmployee/bloc/add_bloc.dart';
+import 'package:realtime_todo/screens/Add&EditEmployee/bloc/add_bloc.dart';
 import 'package:realtime_todo/screens/Home/bloc/home_bloc.dart';
 import 'package:realtime_todo/widgets/custom_appbar.dart';
 
