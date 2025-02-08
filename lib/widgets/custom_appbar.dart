@@ -16,38 +16,44 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      elevation: 1,
-      centerTitle: true,
-      automaticallyImplyLeading: false,
-      backgroundColor: blue,
-      surfaceTintColor: Colors.transparent,
-      title: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: TextStyle(
-            color: white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-      actions: menuonTap == false
-          ? []
-          : [
-              GestureDetector(
-                onTap: buttontap,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 25.w),
-                  child: Image.asset(
-                    'assets/icons/delete.png',
-                    color: white,
-                    width: 15.w,
-                  ),
-                ),
+    return LayoutBuilder(
+      builder: (context, state) {
+        double textSize = state.maxWidth > 600 ? 6.sp : 18.sp;
+        double iconsize = state.maxWidth > 600 ? 6.w : 15.w;
+        return AppBar(
+          elevation: 1,
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          backgroundColor: blue,
+          surfaceTintColor: Colors.transparent,
+          title: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: white,
+                fontSize: textSize,
+                fontWeight: FontWeight.w500,
               ),
-            ],
+            ),
+          ),
+          actions: menuonTap == false
+              ? []
+              : [
+                  GestureDetector(
+                    onTap: buttontap,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 25.w),
+                      child: Image.asset(
+                        'assets/icons/delete.png',
+                        color: white,
+                        width: iconsize,
+                      ),
+                    ),
+                  ),
+                ],
+        );
+      },
     );
   }
 

@@ -50,7 +50,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           'Employee data has been deleted',
           style: TextStyle(
             color: white,
-            fontSize: 15.sp,
+            fontSize: 15,
             fontWeight: FontWeight.w400,
           ),
         ),
