@@ -8,3 +8,5 @@ const Color white = Color(0xffFFFFFF);
 const Color border = Color(0xffE5E5E5);
 const Color liborder = Color(0xffF2F2F2);
 const Color hint = Color(0xff949C9E);
+const Color homebg = Color(0xffF2F2F2);
+const Color red = Color(0xffF34642);

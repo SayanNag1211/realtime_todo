@@ -6,12 +6,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     required this.title,
-    this.backonTap,
+    this.buttontap,
     this.menuonTap = false,
   });
 
   final String title;
-  final Function()? backonTap;
+  final Function()? buttontap;
   final bool menuonTap;
 
   @override
@@ -19,6 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 1,
       centerTitle: true,
+      automaticallyImplyLeading: false,
       backgroundColor: blue,
       surfaceTintColor: Colors.transparent,
       title: Align(
@@ -32,15 +33,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      leading: menuonTap == false
-          ? null
-          : GestureDetector(
-              onTap: backonTap,
-              child: const Icon(
-                Icons.menu,
-                color: Colors.white,
+      actions: menuonTap == false
+          ? []
+          : [
+              GestureDetector(
+                onTap: buttontap,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 25.w),
+                  child: Image.asset(
+                    'assets/icons/delete.png',
+                    color: white,
+                    width: 15.w,
+                  ),
+                ),
               ),
-            ),
+            ],
     );
   }
 
