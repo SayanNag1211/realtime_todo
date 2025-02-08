@@ -162,7 +162,7 @@ class HomeScreen extends StatelessWidget {
                                                 style: TextStyle(
                                                   color: subtxt,
                                                   fontWeight: FontWeight.w400,
-                                                  fontSize: isWeb ? 15 : 14.sp,
+                                                  fontSize: isWeb ? 14 : 12.sp,
                                                 ),
                                               ),
                                             ],
@@ -278,7 +278,7 @@ class HomeScreen extends StatelessWidget {
                                                 style: TextStyle(
                                                   color: subtxt,
                                                   fontWeight: FontWeight.w400,
-                                                  fontSize: isWeb ? 15 : 14.sp,
+                                                  fontSize: isWeb ? 14 : 12.sp,
                                                 ),
                                               ),
                                             ],
