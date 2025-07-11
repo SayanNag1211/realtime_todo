@@ -46,25 +46,26 @@ name: Deploy Flutter Web
 
 on:
   push:
-    branches:
-      - main
-      - master
-      - develop
+    branches: [main, master, develop]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # This is crucial for pushing to gh-pages
     
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Important for gh-pages action
 
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: stable
           architecture: x64
 
       - run: flutter pub get
-      - run: flutter build web --wasm --release
+      - run: flutter build web --wasm --base-href "/realtime_todo/"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -72,3 +73,4 @@ jobs:
           github_token: ${{ secrets.TOKEN }}
           publish_dir: ./build/web
           keep_files: true
+          destination_dir: realtime_todo  # Match the base-href
