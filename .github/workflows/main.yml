@@ -25,18 +25,18 @@ jobs:
           channel: 'stable'
           architecture: x64
 
-      # Build Android APK
-      - run: flutter build apk --release --split-per-abi
+      # # Build Android APK
+      # - run: flutter build apk --release --split-per-abi
       
-      # Build iOS IPA
-      - run: |
-          flutter build ios --no-codesign
-          cd build/ios/iphoneos
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
-          zip -r app.ipa Payload
+      # # Build iOS IPA
+      # - run: |
+      #     flutter build ios --no-codesign
+      #     cd build/ios/iphoneos
+      #     mkdir Payload
+      #     cd Payload
+      #     ln -s ../Runner.app
+      #     cd ..
+      #     zip -r app.ipa Payload
       
       # Build Web (WASM)
       - run: flutter build web --wasm --release
