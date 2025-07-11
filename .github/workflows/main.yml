@@ -1,60 +1,74 @@
+# on:
+#   pull_request:
+#     branches:
+#       - main
+#       - master
+#   push:
+#     branches:
+#       - main
+#       - master
+#       - develop
+# name: "Build & Release"
+# jobs:
+#   build:
+#     name: Build & Release
+#     runs-on: macos-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-java@v3
+#         with:
+#           distribution: 'zulu'
+#           java-version: '17' 
+
+#       - uses: subosito/flutter-action@v2
+#         with:
+#           channel: 'stable'
+#           architecture: x64
+
+#       - run: flutter build apk --release --split-per-abi
+#       - run: |
+#           flutter build ios --no-codesign
+#           cd build/ios/iphoneos
+#           mkdir Payload
+#           cd Payload
+#           ln -s ../Runner.app
+#           cd ..
+#           zip -r app.ipa Payload
+#       - name: Push to Releases
+#         uses: ncipollo/release-action@v1
+#         with:
+#           artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
+#           tag: v1.0.${{ github.run_number }}
+#           token: ${{ secrets.TOKEN }}
+
+
+name: Deploy Flutter Web
+
 on:
-  pull_request:
-    branches:
-      - main
-      - master
   push:
     branches:
       - main
       - master
       - develop
-name: "Build & Release"
+
 jobs:
-  build:
-    name: Build & Release
-    runs-on: macos-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17' 
 
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
 
-      # # Build Android APK
-      # - run: flutter build apk --release --split-per-abi
-      
-      # # Build iOS IPA
-      # - run: |
-      #     flutter build ios --no-codesign
-      #     cd build/ios/iphoneos
-      #     mkdir Payload
-      #     cd Payload
-      #     ln -s ../Runner.app
-      #     cd ..
-      #     zip -r app.ipa Payload
-      
-      # Build Web (WASM)
+      - run: flutter pub get
       - run: flutter build web --wasm --release
-      
-      # Deploy Web to GitHub Pages (or another hosting service)
+
       - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.TOKEN }}
           publish_dir: ./build/web
           keep_files: true
-          destination_dir: ./  # Optional: if you want to deploy to root of gh-pages branch
-
-      # Push mobile builds to Releases
-      - name: Push to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
-          tag: v1.0.${{ github.run_number }}
-          token: ${{ secrets.TOKEN }}
