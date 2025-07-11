@@ -73,4 +73,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
           keep_files: true
-          destination_dir: realtime_todo  # Match the base-href
