@@ -25,7 +25,10 @@ jobs:
           channel: 'stable'
           architecture: x64
 
+      # Build Android APK
       - run: flutter build apk --release --split-per-abi
+      
+      # Build iOS IPA
       - run: |
           flutter build ios --no-codesign
           cd build/ios/iphoneos
@@ -34,6 +37,21 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
+      
+      # Build Web (WASM)
+      - run: flutter build web --wasm --release
+      
+      # Deploy Web to GitHub Pages (or another hosting service)
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
+          keep_files: true
+          destination_dir: ./  # Optional: if you want to deploy to root of gh-pages branch
+
+      # Push mobile builds to Releases
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
